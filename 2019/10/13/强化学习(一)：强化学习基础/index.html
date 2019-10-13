@@ -5,7 +5,7 @@
 
 
 <head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
   <title>强化学习(一)：强化学习基础 | Hexo</title>
 
@@ -89,7 +89,7 @@ ga('send', 'pageview');
 
   
     <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 </head>
@@ -98,7 +98,7 @@ ga('send', 'pageview');
 
 
   
-    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
   
 
   <div class="post-header CENTER">
@@ -251,7 +251,7 @@ ga('send', 'pageview');
 <p>enviroment：环境，这里指地球</p>
 <p>state：agent的状态，用来决定agent下一步做什么</p>
 <p>图中，我们并未发现state，那么接下来讨论下state具体是什么。</p>
-<p>agent每执行一次action，我们总共可以记录以下内容：$A<del>t</del>，O<del>t+1</del>，R<del>t+1</del>$，这是agent的动作和environment所反馈给agent的信息。而state就是用来决定agent的action，它由记录下来的所有历史信息来决定，即$S<del>t</del>=f（A<del>1</del>，O<del>1</del>，R<del>1</del>，A<del>t-1</del>，O<del>t</del>，R<del>t</del>）$。</p>
+<p>agent每执行一次action，我们总共可以记录以下内容：$A~t~，O~t+1~，R~t+1~$，这是agent的动作和environment所反馈给agent的信息。而state就是用来决定agent的action，它由记录下来的所有历史信息来决定，即$S~t~=f（A~1~，O~1~，R~1~，A~t-1~，O~t~，R~t~）$。</p>
 
     
   </div>
@@ -495,6 +495,9 @@ gitalk.render('gitalk-container')
             all[i].SourceElement().parentNode.className += ' has-jax';
     });
 </script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> 
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
 </body>
 </html>
