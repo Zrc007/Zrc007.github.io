@@ -7,7 +7,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>My_Study | Hexo</title>
+  <title>强化学习(一)：强化学习基础 | Hexo</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -15,17 +15,19 @@
     <meta name="keywords" content="zWhat,python,机器学习">
   
 
-  <meta name="description" content="傻屌才点进来！！！">
+  <meta name="description" content="强化学习是什么首先看下百度的解释：   强化学习（Reinforcement Learning, RL），又称再励学习、评价学习或增强学习，是机器学习的范式和方法论之一，用于描述和解决智能体（agent）在与环境的交互过程中通过学习策略以达成回报最大化或实现特定目标的问题 。  再说下自己理解，首先机器学习可以分为三类：监督学习（ supervised learning ），无监督学习（ unsu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="My_Study">
-<meta property="og:url" content="http://yoursite.com/2019/10/10/My-Study/index.html">
+<meta property="og:title" content="强化学习(一)：强化学习基础">
+<meta property="og:url" content="http://yoursite.com/2019/10/13/强化学习(一)：强化学习基础/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="傻屌才点进来！！！">
+<meta property="og:description" content="强化学习是什么首先看下百度的解释：   强化学习（Reinforcement Learning, RL），又称再励学习、评价学习或增强学习，是机器学习的范式和方法论之一，用于描述和解决智能体（agent）在与环境的交互过程中通过学习策略以达成回报最大化或实现特定目标的问题 。  再说下自己理解，首先机器学习可以分为三类：监督学习（ supervised learning ），无监督学习（ unsu">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-10T09:22:18.479Z">
+<meta property="og:image" content="https://img-blog.csdn.net/20180707110954489?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xhZ3JhbmdlU0s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2019-10-13T15:16:44.932Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="My_Study">
-<meta name="twitter:description" content="傻屌才点进来！！！">
+<meta name="twitter:title" content="强化学习(一)：强化学习基础">
+<meta name="twitter:description" content="强化学习是什么首先看下百度的解释：   强化学习（Reinforcement Learning, RL），又称再励学习、评价学习或增强学习，是机器学习的范式和方法论之一，用于描述和解决智能体（agent）在与环境的交互过程中通过学习策略以达成回报最大化或实现特定目标的问题 。  再说下自己理解，首先机器学习可以分为三类：监督学习（ supervised learning ），无监督学习（ unsu">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180707110954489?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xhZ3JhbmdlU0s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
 
   
 
@@ -193,17 +195,22 @@ ga('send', 'pageview');
 </div>
 
 
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">Posts List</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#强化学习是什么"><span class="toc-text">强化学习是什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#强化学习基础"><span class="toc-text">强化学习基础</span></a></li></ol>
+  </div>
+
 
 
 <div class="content content-post CENTER">
-   <article id="post-My-Study" class="article article-type-post" itemprop="blogPost">
+   <article id="post-强化学习(一)：强化学习基础" class="article article-type-post" itemprop="blogPost">
   <header class="article-header">
-    <h1 class="post-title">My_Study</h1>
+    <h1 class="post-title">强化学习(一)：强化学习基础</h1>
 
     <div class="article-meta">
       <span>
         <i class="icon-calendar"></i>
-        <span>2019.10.10</span>
+        <span>2019.10.13</span>
       </span>
 
       
@@ -231,7 +238,20 @@ ga('send', 'pageview');
 
   <div class="article-content">
     
-      <p>傻屌才点进来！！！</p>
+      <h1 id="强化学习是什么"><a href="#强化学习是什么" class="headerlink" title="强化学习是什么"></a><strong>强化学习是什么</strong></h1><p>首先看下百度的解释：</p>
+<blockquote>
+<p> 强化学习（Reinforcement Learning, RL），又称再励学习、评价学习或增强学习，是<a href="https://baike.baidu.com/item/机器学习/217599" target="_blank" rel="noopener">机器学习</a>的范式和<a href="https://baike.baidu.com/item/方法论/82748" target="_blank" rel="noopener">方法论</a>之一，用于描述和解决<a href="https://baike.baidu.com/item/智能体/9446647" target="_blank" rel="noopener">智能体</a>（agent）在与环境的交互过程中通过学习策略以达成回报最大化或实现特定目标的问题 。</p>
+</blockquote>
+<p>再说下自己理解，首先机器学习可以分为三类：监督学习（ supervised learning ），无监督学习（ unsupervised learning ），强化学习（ reinforcement learning ）。那么他们的区别在哪呢，可以举个例子来描述：监督学习就好像cs，打到人就是收益，这时你就可以把标签记作{（靶点：1），（非靶点：0）}，通过大量练习，你的命中率会越来越高；反观强化学习，它更像moba类游戏，目标很简单，摧毁水晶，但是它不像cs，每一个决策都会影响到全局，并且它的影响会复杂的多，你这一步的决策可能会给当前带来收益，但未必会给5分钟后的局面造成优势。那么既然没有标签，我们要如何训练呢，这里就是用到奖赏机制，每做一个决策，会给你一定的奖励，如何让全局的奖励最大，就是我们要去训练的。</p>
+<h1 id="强化学习基础"><a href="#强化学习基础" class="headerlink" title="强化学习基础"></a><strong>强化学习基础</strong></h1><p>强化学习的模型如下所示：</p>
+<p> <img src="https://img-blog.csdn.net/20180707110954489?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xhZ3JhbmdlU0s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> </p>
+<p>agent：智能体，这里指大脑</p>
+<p>action：由agent做出的动作</p>
+<p>reward：agent执行一个action后所得到的奖赏</p>
+<p>enviroment：环境，这里指地球</p>
+<p>state：agent的状态，用来决定agent下一步做什么</p>
+<p>图中，我们并未发现state，那么接下来讨论下state具体是什么。</p>
+<p>agent每执行一次action，我们总共可以记录以下内容：$A<del>t</del>，O<del>t+1</del>，R<del>t+1</del>$，这是agent的动作和environment所反馈给agent的信息。而state就是用来决定agent的action，它由记录下来的所有历史信息来决定，即$S<del>t</del>=f（A<del>1</del>，O<del>1</del>，R<del>1</del>，A<del>t-1</del>，O<del>t</del>，R<del>t</del>）$。</p>
 
     
   </div>
@@ -461,5 +481,20 @@ gitalk.render('gitalk-container')
   }
 </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
