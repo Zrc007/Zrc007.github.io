@@ -7,7 +7,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>强化学习(二)：多臂老虎机 | Hexo</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -17,15 +17,15 @@
 
   <meta name="description" content="前言上一章简单介绍了什么是强化学习，这一章来分析下强化学习的经典案例：多臂老虎机问题。    问题描述上图就是经典的多臂老虎机（不得不说，这和我印象中的老虎机不太一样）。当你投入硬币后，你可以拉动一次拉杆，随后你会获得一定的回报，亦或是没有回报，问题很简单，但我们怎样才能让自己的收益最大化呢？这就是我们需要去研究的问题，最容易想到的就是把每个拉杆都拉几遍，统计下从每个拉杆那得到的回报，选择回报最多">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="强化学习(二)：多臂老虎机">
 <meta property="og:url" content="http://yoursite.com/2019/10/16/强化学习(二)：多臂老虎机/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="前言上一章简单介绍了什么是强化学习，这一章来分析下强化学习的经典案例：多臂老虎机问题。    问题描述上图就是经典的多臂老虎机（不得不说，这和我印象中的老虎机不太一样）。当你投入硬币后，你可以拉动一次拉杆，随后你会获得一定的回报，亦或是没有回报，问题很简单，但我们怎样才能让自己的收益最大化呢？这就是我们需要去研究的问题，最容易想到的就是把每个拉杆都拉几遍，统计下从每个拉杆那得到的回报，选择回报最多">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://yqfile.alicdn.com/img_f112fd1bf65f250b6d629c1c06408291.png">
-<meta property="og:updated_time" content="2019-10-16T12:26:01.636Z">
+<meta property="og:updated_time" content="2019-10-16T13:28:43.131Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="强化学习(二)：多臂老虎机">
 <meta name="twitter:description" content="前言上一章简单介绍了什么是强化学习，这一章来分析下强化学习的经典案例：多臂老虎机问题。    问题描述上图就是经典的多臂老虎机（不得不说，这和我印象中的老虎机不太一样）。当你投入硬币后，你可以拉动一次拉杆，随后你会获得一定的回报，亦或是没有回报，问题很简单，但我们怎样才能让自己的收益最大化呢？这就是我们需要去研究的问题，最容易想到的就是把每个拉杆都拉几遍，统计下从每个拉杆那得到的回报，选择回报最多">
 <meta name="twitter:image" content="https://yqfile.alicdn.com/img_f112fd1bf65f250b6d629c1c06408291.png">
 
@@ -205,7 +205,7 @@ ga('send', 'pageview');
 <div class="content content-post CENTER">
    <article id="post-强化学习(二)：多臂老虎机" class="article article-type-post" itemprop="blogPost">
   <header class="article-header">
-    <h1 class="post-title">(no title)</h1>
+    <h1 class="post-title">强化学习(二)：多臂老虎机</h1>
 
     <div class="article-meta">
       <span>
@@ -252,7 +252,7 @@ ga('send', 'pageview');
 <p>贪心算法总是保证不了全局最优，它把所有精力花费在了exploit上，与sample-average function相对应。</p>
 <h2 id="3-epsilon-greedy-function"><a href="#3-epsilon-greedy-function" class="headerlink" title="3 $\epsilon$-greedy function"></a>3 $\epsilon$-greedy function</h2><p>$\epsilon$-greedy function是对greedy function的优化，他在选择当前最优拉杆的同时，还会随机分配一些机会给其他拉杆。</p>
 <p>我们先选取一个参数$\epsilon$，接着在每次决策时都生成一个随机数，将其于$\epsilon$进行比较，来决定是否要将机会分给其他拉杆：</p>
-<p>$A_t= \begin{cases} argmax_aQ_t(a)，1-\epsilon\\ a^{‘}， \epsilon\end{cases}$</p>
+<p>$</p>
 
     
   </div>
