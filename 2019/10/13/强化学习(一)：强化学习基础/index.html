@@ -23,7 +23,7 @@
 <meta property="og:description" content="强化学习是什么首先看下百度的解释：   强化学习（Reinforcement Learning, RL），又称再励学习、评价学习或增强学习，是机器学习的范式和方法论之一，用于描述和解决智能体（agent）在与环境的交互过程中通过学习策略以达成回报最大化或实现特定目标的问题 。  再说下自己理解，首先机器学习可以分为三类：监督学习（ supervised learning ），无监督学习（ unsu">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://img-blog.csdn.net/20180707110954489?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xhZ3JhbmdlU0s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:updated_time" content="2019-10-14T12:38:00.195Z">
+<meta property="og:updated_time" content="2019-10-16T12:34:58.011Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="强化学习(一)：强化学习基础">
 <meta name="twitter:description" content="强化学习是什么首先看下百度的解释：   强化学习（Reinforcement Learning, RL），又称再励学习、评价学习或增强学习，是机器学习的范式和方法论之一，用于描述和解决智能体（agent）在与环境的交互过程中通过学习策略以达成回报最大化或实现特定目标的问题 。  再说下自己理解，首先机器学习可以分为三类：监督学习（ supervised learning ），无监督学习（ unsu">
@@ -251,7 +251,7 @@ ga('send', 'pageview');
 <p>enviroment：环境，这里指地球</p>
 <p>state：agent的状态，用来决定agent下一步做什么</p>
 <p>图中，我们并未发现state，那么接下来讨论下state具体是什么。</p>
-<p>agent每执行一次action，我们总共可以记录以下内容：$A~t~，O~t+1~，R~t+1~$，这是agent的动作和environment所反馈给agent的信息。而state就是用来决定agent的action，它由记录下来的所有历史信息来决定，即$S~t~=f（A~1~，O~1~，R~1~，A~t-1~，O~t~，R~t~）$。</p>
+<p>agent每执行一次action，我们总共可以记录以下内容：$A_t，O_{t+1}，R_{t+1}$，这是agent的动作和environment所反馈给agent的信息。而state就是用来决定agent的action，它由记录下来的所有历史信息来决定，即$S_t=f（A_1，O_1，R_1，A_{t-1}，O_t，R_t）$。</p>
 <p>这便是强化学习的基本结构。</p>
 
     
@@ -480,25 +480,7 @@ gitalk.render('gitalk-container')
       // load success
     });
   }
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> 
--->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </body>
 </html>
