@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-17T12:17:23.480Z</updated>
+  <updated>2019-10-20T11:54:54.227Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2019/10/16/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0(%E4%BA%8C)%EF%BC%9A%E5%A4%9A%E8%87%82%E8%80%81%E8%99%8E%E6%9C%BA/"/>
     <id>http://yoursite.com/2019/10/16/强化学习(二)：多臂老虎机/</id>
     <published>2019-10-16T13:27:13.000Z</published>
-    <updated>2019-10-17T12:17:23.480Z</updated>
+    <updated>2019-10-20T11:54:54.227Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h1><p>上一章简单介绍了什么是强化学习，这一章来分析下强化学习的经典案例：多臂老虎机问题。</p><p> <img src="https://yqfile.alicdn.com/img_f112fd1bf65f250b6d629c1c06408291.png" alt="img_f112fd1bf65f250b6d629c1c06408291.png"> </p><h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a><strong>问题描述</strong></h1><p>上图就是经典的多臂老虎机（不得不说，这和我印象中的老虎机不太一样）。当你投入硬币后，你可以拉动一次拉杆，随后你会获得一定的回报，亦或是没有回报，问题很简单，但我们怎样才能让自己的收益最大化呢？这就是我们需要去研究的问题，最容易想到的就是把每个拉杆都拉几遍，统计下从每个拉杆那得到的回报，选择回报最多的，接着把所有的硬币全花在这拉杆上；但这种方法有明显的问题，拉10次和拉1000次得到的结果未必是一样的，可能前10次中最差的拉杆刚好让你中了大奖，于是你就把接下来所有机会都花费在上面，但如果你花费1000次来做测试，你又把太多的机会浪费在概率不大的拉杆上，这也是得不偿失。</p><p>在有限的机会下，你要花多少硬币去找最好的的拉杆，花多少去投入到你认为最好的拉杆上呢，这就是著名的探索-利用困境 (Explore-Exploit dilemma(EE dilemma))。</p><p>接下来我们建立下问题的模型：一台老虎机（slot machine）有多个拉杆，用arm表示，所有的arm的集合为：$bandit=${$arm_1,arm_2,……arm_k$}。。</p><p>假设我们在t时刻选择的action为$A_t$，对应的奖励为$R_t$，在t时刻的action a下的奖励为$q(a)=E[R_t|A_t=a]$ ，如果我们能知道$q(a)$的值问题就变得容易了，那么我们就需要预估一个值让它接近$q(a)$，在t时刻选择action a对应的估计价值 （estimated value）记作$Q(a)$。</p><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a><strong>解决方案</strong></h1><h2 id="1-sample-average-function"><a href="#1-sample-average-function" class="headerlink" title="1 sample-average function"></a>1 sample-average function</h2><p>这种方法就是把精力花费在explore上面，每种action都分配定量的次数，我们在t时刻对动作a的估值为</p><p>$Q_t(a)=\frac{\sum(R_i)}{N(a)}$</p><p>其中，$N(a)$为action a执行的次数。当N的次数不断增大时，$Q(a)$会不断向$q(a)$靠近。</p><h2 id="2-greedy-function"><a href="#2-greedy-function" class="headerlink" title="2 greedy function"></a>2 greedy function</h2><p>我们通过少量的测试预估出$Q_t$，然后直接选择最好的action，即</p><p>$A_t=argmax_aQ_t(a)$</p><p>贪心算法总是保证不了全局最优，它把所有精力花费在了exploit上，与sample-average function相对应。</p><h2 id="3-epsilon-greedy-function"><a href="#3-epsilon-greedy-function" class="headerlink" title="3 $\epsilon$-greedy function"></a>3 $\epsilon$-greedy function</h2><p>$\epsilon$-greedy function是对greedy function的优化，他在选择当前最优拉杆的同时，还会随机分配一些机会给其他拉杆。</p><p>我们先选取一个参数$\epsilon$，接着在每次决策时都生成一个随机数，将其于$\epsilon$进行比较，来决定是否要将机会分给其他拉杆：</p><p>$A_t= \begin{cases} argmax_aQ_t(a)，1-\epsilon\\ a^{‘}， \epsilon\end{cases}$</p><p>在我们选取了其他拉杆后就去更新拉杆的预估回报，这种方法即很大程度上满足了exploit，又没有忘记explore；现如今，$\epsilon$-greedy function是在强化学习中运用最为广泛的。</p><h2 id="4-Incremental-Implementation"><a href="#4-Incremental-Implementation" class="headerlink" title="4 Incremental Implementation"></a>4 Incremental Implementation</h2><p>增量式实现是对sample-average function的一种优化。Sample-average function是将所有的历史信息记录下来再求平均，这种方法在计算机计算时要耗费大量内存，是不可取的，我们需要找到一种方法来减小内存的开销。我们可以通过增量实现我们的需求：</p><p>$Q_{n+1}=\frac{1}{n}\sum_{i=1}^n R_i=Q_n+\frac{1}{n}[R_n-Q_n]$</p><p>这样我们只需要存储$Q_n$和n就可以计算出$Q_{n+1}$.</p><h2 id="5-Upper-Condience-Bound"><a href="#5-Upper-Condience-Bound" class="headerlink" title="5 Upper-Condience-Bound"></a>5 Upper-Condience-Bound</h2><p>$\epsilon$-greedy function选择其他拉杆时是随机选择的，但我们可以利用每个拉杆的一些隐藏信息来更合适的分配这些机会，Upper-Condience-Bound方法如下：</p><p>$A_t=argmax_a[A_t(a)+c \sqrt{\frac{\ln t}{N_t(a)}}]$</p><p>其中$N_t(a)$表示action a在之前被选中的次数，当$N_t(a)=0$时，a为当前最优，c&gt;0用于控制探索率。</p><p>可以看见，式子左边主导exploit，式子右边主导explore（它会优先选择被选中次数少的）。Upper-Condience-Bound既保证了exploit和explore，还挖掘出了action的隐藏信息，将其作为一个主导因素。尽管如此，UCB并不容易拓展到强化学习中。</p>]]></content>
     
@@ -36,6 +36,8 @@
     </summary>
     
     
+      <category term="强化学习" scheme="http://yoursite.com/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
+    
     
   </entry>
   
@@ -44,7 +46,7 @@
     <link href="http://yoursite.com/2019/10/13/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0(%E4%B8%80)%EF%BC%9A%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/"/>
     <id>http://yoursite.com/2019/10/13/强化学习(一)：强化学习基础/</id>
     <published>2019-10-13T13:15:03.000Z</published>
-    <updated>2019-10-20T11:48:10.658Z</updated>
+    <updated>2019-10-20T11:55:10.926Z</updated>
     
     <content type="html"><![CDATA[<h1 id="强化学习是什么"><a href="#强化学习是什么" class="headerlink" title="强化学习是什么"></a><strong>强化学习是什么</strong></h1><p>首先看下百度的解释：</p><blockquote><p> 强化学习（Reinforcement Learning, RL），又称再励学习、评价学习或增强学习，是<a href="https://baike.baidu.com/item/机器学习/217599" target="_blank" rel="noopener">机器学习</a>的范式和<a href="https://baike.baidu.com/item/方法论/82748" target="_blank" rel="noopener">方法论</a>之一，用于描述和解决<a href="https://baike.baidu.com/item/智能体/9446647" target="_blank" rel="noopener">智能体</a>（agent）在与环境的交互过程中通过学习策略以达成回报最大化或实现特定目标的问题 。</p></blockquote><p>再说下自己理解，首先机器学习可以分为三类：监督学习（ supervised learning ），无监督学习（ unsupervised learning ），强化学习（ reinforcement learning ）。那么他们的区别在哪呢，可以举个例子来描述：或许我们有疑问，为什么我们总是无法抗拒甜食，我认为这是从祖先那遗传下来的特性，当祖先们摄入高糖量食物时，他们往往可以获得足够的能量，久而久之，大脑便开始偏爱甜食，当人们摄入甜食时，大脑中的多巴胺神经元便会被激活，分泌一种使人兴奋的物质，这就是监督学习；那么什么是无监督学习呢？在当时，祖先未必知道什么是动物，什么是植物，什么是鸟等等，但他们不断观察发现，某个物体都会有自己的特性，有些物体间又有着相似的特性，于是他们开始给它们分类，这便是无监督学习；接着在看看,我们的祖先是如何进化成智人的，起初他们生活在非洲的树林中，但渐渐的，或许是植被遭到破坏，还是某种原因，他们不得不下树，学会走路，随着环境的变化，他们开始不断地迁移，在迁移过程中，四肢行走消耗太多的能量，逐渐被直立行走所替代，慢慢的祖先开始不同于其他生物，但他们在捕猎过程中，他们可以慢慢走过去猎捕猎物，然而猎物也开始警觉，当看见祖先时便会逃跑，于是人们也相应地开始学会奔跑，这便是强化学习，这是一个智能体和动态环境不断交互的过程。</p><h1 id="强化学习基础"><a href="#强化学习基础" class="headerlink" title="强化学习基础"></a><strong>强化学习基础</strong></h1><p>强化学习的模型如下所示：</p><p> <img src="https://raw.githubusercontent.com/Zrc007/Zrc007.github.io/master/images/RL_01/p_01.png" alt="img"> </p><p>agent：智能体，这里指大脑</p><p>action：由agent做出的动作</p><p>reward：agent执行一个action后所得到的奖赏</p><p>enviroment：环境，这里指地球</p><p>state：agent的状态，用来决定agent下一步做什么</p><p>图中，我们并未发现state，那么接下来讨论下state具体是什么。</p><p>agent每执行一次action，我们总共可以记录以下内容：$A_t，O_{t+1}，R_{t+1}$，这是agent的动作和environment所反馈给agent的信息。而state就是用来决定agent的action，它由记录下来的所有历史信息来决定，即$S_t=f（A_1，O_1，R_1，A_{t-1}，O_t，R_t）$。</p><p>这便是强化学习的基本结构。</p>]]></content>
     

@@ -23,7 +23,7 @@
 <meta property="og:description" content="前言上一章简单介绍了什么是强化学习，这一章来分析下强化学习的经典案例：多臂老虎机问题。    问题描述上图就是经典的多臂老虎机（不得不说，这和我印象中的老虎机不太一样）。当你投入硬币后，你可以拉动一次拉杆，随后你会获得一定的回报，亦或是没有回报，问题很简单，但我们怎样才能让自己的收益最大化呢？这就是我们需要去研究的问题，最容易想到的就是把每个拉杆都拉几遍，统计下从每个拉杆那得到的回报，选择回报最多">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://yqfile.alicdn.com/img_f112fd1bf65f250b6d629c1c06408291.png">
-<meta property="og:updated_time" content="2019-10-17T12:17:23.480Z">
+<meta property="og:updated_time" content="2019-10-20T11:54:54.227Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="强化学习(二)：多臂老虎机">
 <meta name="twitter:description" content="前言上一章简单介绍了什么是强化学习，这一章来分析下强化学习的经典案例：多臂老虎机问题。    问题描述上图就是经典的多臂老虎机（不得不说，这和我印象中的老虎机不太一样）。当你投入硬币后，你可以拉动一次拉杆，随后你会获得一定的回报，亦或是没有回报，问题很简单，但我们怎样才能让自己的收益最大化呢？这就是我们需要去研究的问题，最容易想到的就是把每个拉杆都拉几遍，统计下从每个拉杆那得到的回报，选择回报最多">
@@ -221,6 +221,11 @@ ga('send', 'pageview');
       
 
       
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/强化学习/">强化学习</a>
+  </span>
+
 
 
       
@@ -488,7 +493,25 @@ gitalk.render('gitalk-container')
       // load success
     });
   }
-</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> 
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </body>
 </html>

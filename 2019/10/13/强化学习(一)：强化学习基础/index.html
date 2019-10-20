@@ -23,7 +23,7 @@
 <meta property="og:description" content="强化学习是什么首先看下百度的解释：   强化学习（Reinforcement Learning, RL），又称再励学习、评价学习或增强学习，是机器学习的范式和方法论之一，用于描述和解决智能体（agent）在与环境的交互过程中通过学习策略以达成回报最大化或实现特定目标的问题 。  再说下自己理解，首先机器学习可以分为三类：监督学习（ supervised learning ），无监督学习（ unsu">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://raw.githubusercontent.com/Zrc007/Zrc007.github.io/master/images/RL_01/p_01.png">
-<meta property="og:updated_time" content="2019-10-20T11:48:10.658Z">
+<meta property="og:updated_time" content="2019-10-20T11:55:10.926Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="强化学习(一)：强化学习基础">
 <meta name="twitter:description" content="强化学习是什么首先看下百度的解释：   强化学习（Reinforcement Learning, RL），又称再励学习、评价学习或增强学习，是机器学习的范式和方法论之一，用于描述和解决智能体（agent）在与环境的交互过程中通过学习策略以达成回报最大化或实现特定目标的问题 。  再说下自己理解，首先机器学习可以分为三类：监督学习（ supervised learning ），无监督学习（ unsu">
@@ -485,7 +485,25 @@ gitalk.render('gitalk-container')
       // load success
     });
   }
-</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> 
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </body>
 </html>
