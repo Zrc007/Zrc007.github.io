@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Runchuan Zhu</title>
+  <link rel="icon" type="image/png" href="costa-favicon-ink-192.png" />
+  <!-- Computer Modern (LaTeX) web fonts: Serif / Sans / Typewriter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css" />
+  <style>
+    html, body { margin: 0; padding: 0; }
+    body { background: #f5f1ea; color: #003D7C; font-family: 'Computer Modern Serif', Georgia, serif; }
+    a { color: inherit; }
+    #root:empty::before { content: ''; display: block; height: 100vh; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Canonical design tokens + DSPage/DSSection/WaveGlyph. Keep as a sibling file; do not inline. -->
+  <script type="text/babel" src="tokens.jsx"></script>
+
+  <script type="text/babel" data-presets="react">
+    // DSPage / DSSection / WaveGlyph / TOKENS are declared globally by tokens.jsx
+    // (both text/babel scripts share one global scope) — do NOT re-destructure from
+    // window here, or Babel throws "Identifier 'DSPage' has already been declared".
+    // Override the canonical type stacks with Computer Modern (LaTeX look) for
+    // this page only. Mutating our local sibling copy of TOKENS also restyles
+    // the DSPage/DSSection chrome, which reads TOKENS.type at render time.
+    TOKENS.type.display.stack   = '"Computer Modern Serif", Georgia, serif';
+    TOKENS.type.editorial.stack = '"Computer Modern Serif", Georgia, serif';
+    TOKENS.type.mono.stack      = '"Computer Modern Typewriter", ui-monospace, monospace';
+
+    const C = TOKENS.color;
+    const T = TOKENS.type;
+
+    // ---- Data (from CV) -------------------------------------------------
+    // Selected first / co-first-authored papers. '*' marks equal contribution.
+    const PAPERS = [
+      {
+        venue: 'EMNLP 2025',
+        img: 'papers/adaptflow.png',
+        title: 'AdaptFlow: Adaptive Workflow Optimization via Meta-Learning',
+        authors: ['Runchuan Zhu', 'Bowen Jiang', 'Lingrui Mei', 'Fangkai Yang', 'Lu Wang', 'Haoxiang Gao', 'Fengshuo Bai', 'Pu Zhao', 'Qingwei Lin', 'Saravan Rajmohan', 'Dongmei Zhang'],
+      },
+      {
+        venue: 'EMNLP 2025',
+        img: 'papers/3ds.png',
+        title: '3DS: Decomposed Difficulty Data Selection’s Case Study on LLM Medical Domain Adaptation',
+        authors: ['Hongxin Ding*', 'Yue Fang*', 'Runchuan Zhu*', 'Xinke Jiang', 'Jinyang Zhang', 'Yongxin Xu', 'Xu Chu', 'Junfeng Zhao', 'Yasha Wang'],
+      },
+      {
+        venue: 'NAACL 2025',
+        img: 'papers/grait.png',
+        title: 'GRAIT: Gradient-Driven Refusal-Aware Instruction Tuning for Effective Hallucination Mitigation',
+        authors: ['Runchuan Zhu', 'Xinke Jiang', 'Jiang Wu', 'Zhipeng Ma', 'Jiahe Song', 'Fengshuo Bai', 'Dahua Lin', 'Lijun Wu', 'Conghui He'],
+      },
+      {
+        venue: 'AAAI 2025',
+        img: 'papers/crkf.png',
+        title: 'Utilize the Flow before Stepping into the Same River Twice: Certainty Represented Knowledge Flow for Refusal-Aware Instruction Tuning',
+        authors: ['Runchuan Zhu', 'Zhipeng Ma', 'Jiang Wu', 'Junyuan Gao', 'Jiaqi Wang', 'Dahua Lin', 'Conghui He'],
+      },
+    ];
+
+    const AWARDS = [
+      { year: '2025', text: 'Outstanding Graduates of Beijing' },
+      { year: '2023', text: 'National Scholarship for Graduates' },
+      { year: '2023', text: 'Peking University Outstanding Student Model' },
+    ];
+
+    // ---- Small UI helpers ----------------------------------------------
+    function Row({ period, children }) {
+      return (
+        <div style={{
+          display: 'grid', gridTemplateColumns: '180px 1fr', gap: 24,
+          padding: '18px 0', borderTop: `1px solid ${C.fog.value}`,
+          alignItems: 'baseline',
+        }}>
+          <div style={{
+            fontFamily: T.mono.stack, fontSize: 12, letterSpacing: '0.04em',
+            color: C.ink.value, opacity: 0.55, whiteSpace: 'nowrap',
+          }}>{period}</div>
+          <div>{children}</div>
+        </div>
+      );
+    }
+
+    // Render an author list, emphasizing "Runchuan Zhu".
+    function Authors({ list }) {
+      return (
+        <span>
+          {list.map((a, i) => {
+            const isSelf = a.replace('*', '').trim() === 'Runchuan Zhu';
+            return (
+              <React.Fragment key={i}>
+                <span style={{
+                  fontWeight: isSelf ? 700 : 400,
+                  color: isSelf ? C.secondary.value : C.ink.value,
+                }}>{a}</span>
+                {i < list.length - 1 ? ', ' : ''}
+              </React.Fragment>
+            );
+          })}
+        </span>
+      );
+    }
+
+    // Local page shell — like DSPage but without the "COSTA LAB · DESIGN SYSTEM"
+    // header row or the subtitle line. Keeps tokens.jsx untouched.
+    function Shell({ title, breadcrumb, children, width = 1200 }) {
+      return (
+        <div style={{ background: C.paper.value, minHeight: '100vh', fontFamily: T.display.stack, color: C.ink.value }}>
+          <div style={{ maxWidth: width, margin: '0 auto', padding: '40px 64px 96px' }}>
+            {breadcrumb && (
+              <div style={{
+                fontFamily: T.mono.stack, fontSize: 13, letterSpacing: '0.04em',
+                color: C.ink.value, opacity: 0.6, marginBottom: 44,
+              }}>{breadcrumb}</div>
+            )}
+            <div style={{ fontFamily: T.display.stack, fontWeight: 700, fontSize: 64, letterSpacing: '-0.04em', lineHeight: 0.95, color: C.ink.value }}>
+              {title}
+            </div>
+            <div style={{ height: 48 }} />
+            {children}
+          </div>
+        </div>
+      );
+    }
+
+    // Paper teaser thumbnail. Falls back to a labeled placeholder box if the
+    // image file is missing — drop a PNG/JPG at the path in PAPERS[].img to fill it.
+    function Thumb({ src, label }) {
+      const [ok, setOk] = React.useState(true);
+      const box = {
+        width: '100%', aspectRatio: '2 / 1', borderRadius: TOKENS.radius.md,
+        overflow: 'hidden', border: `1px solid ${C.fog.value}`,
+        background: C.paperWarm.value, boxShadow: TOKENS.shadow.card,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+      };
+      if (src && ok) {
+        return (
+          <div style={box}>
+            <img src={src} alt={label} onError={() => setOk(false)}
+                 style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          </div>
+        );
+      }
+      return (
+        <div style={box}>
+          <span style={{
+            fontFamily: T.mono.stack, fontSize: 11, letterSpacing: '0.08em',
+            color: C.ink.value, opacity: 0.4, textAlign: 'center', padding: '0 10px',
+          }}>{label}</span>
+        </div>
+      );
+    }
+
+    // ---- Page -----------------------------------------------------------
+    function Page() {
+      return (
+        <Shell title="Runchuan Zhu" breadcrumb={
+          <span>
+            <a href="https://jyhong.gitlab.io/" target="_blank" rel="noopener"
+               style={{ color: C.ink.value, textDecoration: 'none' }}>CoSTA Lab</a>
+            <span style={{ opacity: 0.4, margin: '0 8px' }}>/</span>
+            <span style={{ color: C.accent.value }}>Personal Page</span>
+          </span>
+        }>
+
+          {/* Top contact links */}
+          <div style={{
+            display: 'flex', flexWrap: 'wrap', gap: 18, alignItems: 'center',
+            marginTop: -32, marginBottom: 44,
+            fontFamily: T.mono.stack, fontSize: 13, letterSpacing: '0.03em',
+          }}>
+            <a href="mailto:zhurunchuan0828@gmail.com"
+               style={{ color: C.accent.value, textDecoration: 'none', borderBottom: `1px solid ${C.accent.value}55` }}>Email</a>
+            <span style={{ color: C.ink.value, opacity: 0.35 }}>·</span>
+            <a href="https://scholar.google.com/citations?view_op=list_works&hl=zh-CN&user=Y_9AfuIAAAAJ" target="_blank" rel="noopener"
+               style={{ color: C.accent.value, textDecoration: 'none', borderBottom: `1px solid ${C.accent.value}55` }}>Google Scholar</a>
+          </div>
+
+          {/* Intro + interests */}
+          <DSSection title="About">
+            <p style={{
+              fontFamily: T.editorial.stack, fontSize: 21, lineHeight: 1.6,
+              maxWidth: 760, margin: '0 0 28px', color: C.ink.value,
+            }}>
+              I am a Research Assistant in the <strong>CoSTA@NUS Lab</strong> at the
+              National University of Singapore, advised by Prof.{' '}
+              <a href="https://jyhong.gitlab.io/" target="_blank" rel="noopener"
+                 style={{ color: C.accent.value, textDecoration: 'none', borderBottom: `1px solid ${C.accent.value}55` }}>Junyuan Hong</a>.
+              I received my master's degree from <strong>Peking University</strong>,
+              where I was advised by Prof.{' '}
+              <a href="https://faculty.pku.edu.cn/wangyasha/en/zsxx/10565/list/%7B%7Burl:url%7D%7D" target="_blank" rel="noopener"
+                 style={{ color: C.accent.value, textDecoration: 'none', borderBottom: `1px solid ${C.accent.value}55` }}>Yasha Wang</a>,
+              and my bachelor's degree from <strong>Southeast University</strong>. Along the way I interned at
+              Alibaba Tongyi Lab, Microsoft Research Asia, Shanghai AI Lab,
+              and SenseTime.
+              My current research interests span Agent, AI and Cognitive Science, and World Models.
+            </p>
+          </DSSection>
+
+          {/* Selected Papers */}
+          <DSSection title="Selected Papers">
+            {PAPERS.map((p, i) => (
+              <div key={i} style={{
+                display: 'grid', gridTemplateColumns: '440px 1fr', gap: 40,
+                padding: '24px 0', borderTop: `1px solid ${C.fog.value}`,
+                alignItems: 'start',
+              }}>
+                <Thumb src={p.img} label={p.venue} />
+                <div>
+                  <div style={{
+                    fontFamily: T.mono.stack, fontSize: 11, letterSpacing: '0.06em',
+                    textTransform: 'uppercase', color: C.accent.value, marginBottom: 8,
+                  }}>{p.venue}</div>
+                  <div style={{ fontWeight: 600, fontSize: 18, lineHeight: 1.4, color: C.secondary.value }}>{p.title}</div>
+                  <div style={{ fontSize: 14.5, marginTop: 8, lineHeight: 1.55, color: C.ink.value, opacity: 0.85 }}>
+                    <Authors list={p.authors} />
+                  </div>
+                </div>
+              </div>
+            ))}
+            <div style={{
+              marginTop: 18, fontFamily: T.editorial.stack, fontStyle: 'italic',
+              fontSize: 13, color: C.ink.value, opacity: 0.6,
+            }}>* Equal contribution.</div>
+          </DSSection>
+
+          {/* Awards */}
+          <DSSection title="Awards & Scholarships">
+            {AWARDS.map((a, i) => (
+              <Row key={i} period={a.year}>
+                <div style={{ fontSize: 16, color: C.ink.value }}>{a.text}</div>
+              </Row>
+            ))}
+          </DSSection>
+
+          {/* Footer */}
+          <div style={{
+            marginTop: 24, paddingTop: 24, borderTop: `1px solid ${C.fog.value}`,
+            display: 'flex', alignItems: 'center', gap: 12,
+            fontFamily: T.mono.stack, fontSize: 11, letterSpacing: '0.08em',
+            textTransform: 'uppercase', color: C.ink.value, opacity: 0.5,
+          }}>
+            <WaveGlyph size={24} rx={12} stroke={2.5} />
+            © 2026 Runchuan Zhu
+          </div>
+        </Shell>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<Page />);
+  </script>
+</body>
+</html>
