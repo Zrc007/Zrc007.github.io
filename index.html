@@ -1275,7 +1275,7 @@
     const highlightName = (authors) => escapeHtml(authors).replaceAll("Runchuan Zhu", "<strong>Runchuan Zhu</strong>");
     const publicationYear = (paper) => Number(paper.venue.match(/\d{4}/)?.[0] || 0);
     const isLeadAuthor = (paper) => paper.authors.trim().startsWith("Runchuan Zhu")
-      || (paper.equal && paper.authors.includes("Runchuan Zhu*"));
+      || Boolean(paper.equal && paper.authors.includes("Runchuan Zhu*"));
     const typeOrder = { published: 0, preprint: 1 };
     const sortedPublications = [...publications].sort((a, b) => {
       const typeDifference = typeOrder[a.type] - typeOrder[b.type];
